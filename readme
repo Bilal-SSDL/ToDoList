@@ -1,0 +1,12 @@
+A: SETUP ENVIRONMENT
+    1: Install python
+    2: start new project with virtual environment and activate it
+    3: Install flask
+        pip install flask  and then run pip freeze > requirements.txt to lock the version and if required we can install again with pip install -r requirements.txt
+    4: List install packages: pip list
+    5: create app.py and add sample code to test environment
+    6: run application with python app.py or run in background with nohup python app.py and stop using ps aux | grep app.py
+
+B: SourceCode
+    1: Create Github repo with name ToDoList
+    2: Push all the code on day end to repo
