@@ -1,8 +1,34 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
     <body>
+     <form id="addTaskForm">
         <h1>
             Add your task    
         </h1>
+        <input type="text" id="taskInput" placeholder="Enter your task name here"></input>
+        <button id="taskBtn" type="button">
+            Add task
+        </button>
+     </form>
+     <script>
+        $("#taskBtn").click(function() {
+            var task = $("#taskInput").val();
+            $.ajax({
+                url: "/add",
+                method: "POST",
+                data: JSON.stringify({ task: task }),
+                contentType: "application/json",
+                success: function(response) {
+                    alert("Task added successfully");
+                },
+                error: function(xhr, status, error) {
+                    alert("Error adding task: "+error);
+                }
+            });
+        });
+     </script>
     </body>
 </html>

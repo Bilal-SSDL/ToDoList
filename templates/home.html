@@ -4,5 +4,45 @@
         <h1>
             Welcome to ToDoList application
         </h1>
+        <p>
+            <h2>
+                Add Task
+            </h2>
+            <!-- <a href="add">
+                Adding task through anchor
+            </a> -->
+            <button type="button" onclick="gotoAdd()">
+                Add
+            </button>
+
+            <h2>
+               Update Task
+            </h2>
+            <button type="button" onclick="gotoUpdate()">
+                Update
+            </button>
+
+            <h2>
+                Delete Task
+            </h2>
+            <button type="button" onclick="gotoDelete()">
+                Delete
+            </button>
+       
+
+        </p>
+        <script>
+            function gotoAdd() {
+                window.location.href = "add";
+            }
+
+            function gotoUpdate() {
+                window.location.href = "update";
+            }
+
+            function gotoDelete() {
+                window.location.href = "delete";
+            }
+        </script>
     </body>
 </html>
