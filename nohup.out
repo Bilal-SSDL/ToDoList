@@ -11,3 +11,13 @@
 127.0.0.1 - - [27/Apr/2024 00:42:47] "GET / HTTP/1.1" 200 -
 127.0.0.1 - - [27/Apr/2024 00:42:47] "[33mGET /cart.json HTTP/1.1[0m" 404 -
 127.0.0.1 - - [27/Apr/2024 00:42:54] "GET / HTTP/1.1" 200 -
+Traceback (most recent call last):
+  File "app.py", line 18, in <module>
+    def update_task():
+  File "/home/ammara/Desktop/DEVOPS/Projects/ToDoList/ToDoList/lib/python3.8/site-packages/flask/sansio/scaffold.py", line 362, in decorator
+    self.add_url_rule(rule, endpoint, f, **options)
+  File "/home/ammara/Desktop/DEVOPS/Projects/ToDoList/ToDoList/lib/python3.8/site-packages/flask/sansio/scaffold.py", line 47, in wrapper_func
+    return f(self, *args, **kwargs)
+  File "/home/ammara/Desktop/DEVOPS/Projects/ToDoList/ToDoList/lib/python3.8/site-packages/flask/sansio/app.py", line 657, in add_url_rule
+    raise AssertionError(
+AssertionError: View function mapping is overwriting an existing endpoint function: update_task
