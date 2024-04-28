@@ -11,3 +11,38 @@ A: SETUP ENVIRONMENT
 B: SourceCode
     1: Create Github repo with name ToDoList
     2: Push all the code on day end to repo
+
+C: Taskstodo:
+    Code Side:
+    1: Seperate the code files as per functionality
+    2: Add classes
+    3: Add mysql database
+    4: Add Signup and login
+    5: Convert into microservices
+    6: Improve code structure
+    7: Improve Design or add some css
+
+    Devops Side:
+     Manual Deployment:
+    1: Deploy application locally
+    2: Dockerize the application
+    3: Run on docker locally
+    4: Run on docker compose locally
+    5: Deploy on AWS ECS and ECR
+    6: Deploy on Azure Container instances and ACR
+    7: Deploy using AWS EKS, ECR Route53, ALB, Volumes, AWS Secret manager etc
+    8: Deploy using Azure AKS, ACR DNS, LBs, Disk, Vaults etc
+    
+     Automatic Deployment:
+    1: Create AWS Infrastructure using Terraform and Pulumi
+    2: Create Azure Infrastructure using Terraform and Pulumi
+    3: Creating all infrastructure using Jenkins/Azure Devops
+    4: Deployment of tasktodo application using Jenkins/Azure Devops/Github actions/Gitlab
+    5: Configurations and installations using ansible playbooks
+    6: Package installations using helm 
+    7: Setting up Grafana and prometheus monitoring on K8s cluster deployment.
+    8: Integration of Sonarqube in pipeline
+    9: Integration of trivy in pipeline
+    10: Integration of Sellinium in pipeline
+
+
