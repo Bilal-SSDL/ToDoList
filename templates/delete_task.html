@@ -1,14 +1,34 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
     <body>
         <form>
             <h1>
                 Delete Task    
             </h1>
-            <input />
-            <button>
+            <input id="idinput" placeholder="Enter ID here"/>
+            <button id="idbtn">
                 Delete task
             </button>
          </form>
     </body>
+    <script>
+         $("#idbtn").click(function() {
+            var id  = $("#idinput").val();
+            $.ajax({
+                url: "/delete",
+                method: "DELETE",
+                data: JSON.stringify({ id: id}),
+                contentType: "application/json",
+                success: function(response) {
+                    alert("Task Deleted successfully");
+                },
+                error: function(xhr, status, error) {
+                    alert("Error Deleting task: "+error);
+                }
+            });
+        });
+    </script>
 </html>

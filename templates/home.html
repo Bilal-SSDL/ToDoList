@@ -28,8 +28,30 @@
             <button type="button" onclick="gotoDelete()">
                 Delete
             </button>
-       
-
+            <h2>
+                Current Task List:
+            </h2>
+{% if tasks %}
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Task</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop through each task and display its content -->
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.id }}</td>
+                    <td>{{ task.task }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        {% else %}
+    <p>No tasks found.</p>
+        {% endif %}
         </p>
         <script>
             function gotoAdd() {

@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
     <body>
         <form>
             <h1>
                 Update your task    
             </h1>
-            <input />
-            <button>
+            <input type="number" id="uidInput" placeholder="Enter ID here"></input>
+            <input type="text" id="utaskInput" placeholder="Enter Updated task name here"></input>
+            <button id="utaskBtn" type="button">
                 Update task
             </button>
          </form>
     </body>
+    <script>
+        $("#utaskBtn").click(function() {
+            var task = $("#utaskInput").val();
+            var id  = $("#uidInput").val();
+            $.ajax({
+                url: "/update",
+                method: "PUT",
+                data: JSON.stringify({ task: task, id: id}),
+                contentType: "application/json",
+                success: function(response) {
+                    alert("Task Updated successfully");
+                },
+                error: function(xhr, status, error) {
+                    alert("Error Updating task: "+error);
+                }
+            });
+        });
+     </script>
 </html>
