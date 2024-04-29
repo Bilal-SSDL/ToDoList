@@ -1,42 +1,18 @@
 from flask import Flask, render_template, request, jsonify
+from database import dbAPI
 #from flask_sqlalchemy import SQLAlchemy
-import sqlite3
 
 app_inst = Flask(__name__)
 
-# initiaize the database
-# app_inst.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://todo.db'
-# db = SQLAlchemy(app_inst)
-def get_db_connection():
-    connection = sqlite3.connect('tasktodo.db')
-    connection.row_factory = sqlite3.Row
-    return connection
-
-def get_db_cursor(connection):
-    cursor = connection.cursor()
-    return cursor
-
-def create_db_table():
-    connection = get_db_connection()
-    cursor = get_db_cursor(connection)
-    cursor.execute('''CREATE TABLE IF NOT EXISTS tasks_new (
-                   id INTEGER PRIMARY KEY,
-                   task TEXT
-    )''')
-    connection.commit()
-    connection.close()
-
-# class Task(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     content = db.Column(db.String(200), nullable=False)
-#     db.create_all()
+#dbAPI class instance
+db_api = dbAPI('tasktodo.db')
 
 
 @app_inst.route("/" , methods=['GET', 'POST'])
 def home():
 
-        connection = get_db_connection()
-        cursor = get_db_cursor(connection)
+        connection = db_api.get_db_connection()
+        cursor = db_api.get_db_cursor(connection)
         data = cursor.execute("SELECT * FROM tasks_new").fetchall()
         #connection.commit()
         connection.close()
@@ -47,9 +23,9 @@ def home():
 def add_task():
     if request.method == "POST":
         task = request.json.get("task")
-        create_db_table()
-        connection = get_db_connection()
-        cursor = get_db_cursor(connection)
+        db_api.create_db_table()
+        connection = db_api.get_db_connection()
+        cursor = db_api.get_db_cursor(connection)
         cursor.execute("INSERT INTO tasks_new (task) VALUES (?)", (task,))
         connection.commit()
         connection.close()
@@ -64,8 +40,8 @@ def update_task():
         id   = request.json.get("id")
         print("Task ", task)
         print("ID ", id)
-        connection = get_db_connection()
-        cursor = get_db_cursor(connection)
+        connection = db_api.get_db_connection()
+        cursor = db_api.get_db_cursor(connection)
         cursor.execute("UPDATE tasks_new SET task= ? where id = ?", (task, id,))
         connection.commit()
         connection.close()
@@ -78,8 +54,8 @@ def delete_task():
     if request.method == "DELETE":
         #task = request.json.get("task")
         id   = request.json.get("id")
-        connection = get_db_connection()
-        cursor = get_db_cursor(connection)
+        connection = db_api.get_db_connection()
+        cursor = db_api.get_db_cursor(connection)
         cursor.execute("DELETE FROM tasks_new WHERE id= ?", ( id,))
         connection.commit()
         connection.close()
