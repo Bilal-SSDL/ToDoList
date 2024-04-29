@@ -8,7 +8,7 @@ class dbAPI:
         self.db_name = db_name   
     
     def get_db_connection(self):
-        connection = sqlite3.connect('tasktodo.db')
+        connection = sqlite3.connect(self.db_name)
         connection.row_factory = sqlite3.Row
         return connection
 
