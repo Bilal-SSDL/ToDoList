@@ -4,19 +4,16 @@ from database import dbAPI
 
 
 app_inst = Flask(__name__)
-
 #dbAPI class instance
 db_api = dbAPI('tasktodo.db')
 
 class home:
-    #def __init__(self):
         
     @app_inst.route("/" , methods=['GET', 'POST'])
     def home():
         connection = db_api.get_db_connection()
         cursor = db_api.get_db_cursor(connection)
         data = cursor.execute("SELECT * FROM tasks_new").fetchall()
-        #connection.commit()
         connection.close()
         print(data)
         return render_template('home.html', tasks=data)
@@ -54,7 +51,6 @@ class home:
     @app_inst.route("/delete", methods=['GET', 'DELETE'])
     def delete_task():
         if request.method == "DELETE":
-        #task = request.json.get("task")
             id   = request.json.get("id")
             connection = db_api.get_db_connection()
             cursor = db_api.get_db_cursor(connection)
