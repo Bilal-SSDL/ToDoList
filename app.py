@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from database import dbAPI
+from DBAPI import dbAPI
 #from flask_sqlalchemy import SQLAlchemy
 
 
