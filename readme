@@ -1,5 +1,5 @@
 April 26, 2024 Friday
-A: SETUP ENVIRONMENT
+A: SETUP ENVIRONMENT  DONE
     1: Install python
     2: start new project with virtual environment and activate it
     3: Install flask
@@ -8,12 +8,12 @@ A: SETUP ENVIRONMENT
     5: create app.py and add sample code to test environment
     6: run application with python app.py or run in background with nohup python app.py and stop using ps aux | grep app.py
 
-B: SourceCode
+B: SourceCode  DONE
     1: Create Github repo with name ToDoList
     2: Push all the code on day end to repo
 
 C: Taskstodo:
-    Code Side:
+    Code Side:  INPROGRESS
     1: Seperate the code files as per functionality
     2: Add classes
     3: Add mysql database
