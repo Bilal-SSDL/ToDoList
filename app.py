@@ -5,7 +5,7 @@ from DBAPI import dbAPI
 
 app_inst = Flask(__name__)
 #dbAPI class instance
-db_api = dbAPI('tasktodo.db')
+db_api = dbAPI('tasktodo')
 
 class home:
         
@@ -13,9 +13,12 @@ class home:
     def home():
         connection = db_api.get_db_connection()
         cursor = db_api.get_db_cursor(connection)
-        data = cursor.execute("SELECT * FROM tasks_new").fetchall()
+        db_api.create_db_table()
+        cursor.execute("SELECT * FROM tasks_new")
+        data = cursor.fetchall()     
         connection.close()
         print(data)
+        #for row in data:
         return render_template('home.html', tasks=data)
 
     @app_inst.route("/add", methods=['GET', 'POST'])
@@ -25,7 +28,8 @@ class home:
             db_api.create_db_table()
             connection = db_api.get_db_connection()
             cursor = db_api.get_db_cursor(connection)
-            cursor.execute("INSERT INTO tasks_new (task) VALUES (?)", (task,))
+            insert_query = "INSERT INTO tasks_new (task) VALUES (%s)"
+            cursor.execute(insert_query, (task,))
             connection.commit()
             connection.close()
             return jsonify({"message": "Task added successfully"}), 200
@@ -41,7 +45,8 @@ class home:
             print("ID ", id)
             connection = db_api.get_db_connection()
             cursor = db_api.get_db_cursor(connection)
-            cursor.execute("UPDATE tasks_new SET task= ? where id = ?", (task, id,))
+            update_query = "UPDATE tasks_new SET task= %s where id = %s"
+            cursor.execute(update_query, (task, id,))
             connection.commit()
             connection.close()
             return jsonify({"message": "Task Updated successfully"}), 200
@@ -54,7 +59,8 @@ class home:
             id   = request.json.get("id")
             connection = db_api.get_db_connection()
             cursor = db_api.get_db_cursor(connection)
-            cursor.execute("DELETE FROM tasks_new WHERE id= ?", ( id,))
+            delete_query = "DELETE FROM tasks_new WHERE id= %s"
+            cursor.execute(delete_query, ( id,))
             connection.commit()
             connection.close()
             return jsonify({"message": "Task Deleted successfully"}), 200

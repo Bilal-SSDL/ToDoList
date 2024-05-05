@@ -43,8 +43,8 @@
             <!-- Loop through each task and display its content -->
             {% for task in tasks %}
                 <tr>
-                    <td>{{ task.id }}</td>
-                    <td>{{ task.task }}</td>
+                    <td>{{ task[0] }}</td>
+                    <td>{{ task[1] }}</td>
                 </tr>
             {% endfor %}
         </tbody>

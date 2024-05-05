@@ -8,3 +8,4 @@ MarkupSafe==2.1.5
 werkzeug==3.0.2
 zipp==3.18.1
 SQLAlchemy==2.0.29
+mysql_connector_python==8.4.0
