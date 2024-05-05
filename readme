@@ -14,13 +14,13 @@ B: SourceCode  DONE
 
 C: Taskstodo:
     Code Side:  INPROGRESS
-    1: Seperate the code files as per functionality
-    2: Add classes
-    3: Add mysql database
-    4: Add Signup and login
-    5: Convert into microservices
-    6: Improve code structure
-    7: Improve Design or add some css
+    1: Seperate the code files as per functionality ==> Partial DONE 8 May
+    2: Add classes ==> Partial done 8 May
+    3: Add mysql database ==> DONE
+    4: Add Signup and login 6 May
+    5: Convert into microservices 7 May
+    6: Improve code structure 8 May
+    7: Improve Design or add some css 8 May
 
     Devops Side:
      Manual Deployment:
