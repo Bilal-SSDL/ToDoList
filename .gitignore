@@ -1,3 +1,4 @@
 ToDoList/
 nohup.out
 tasktodo.db
+__pycache__/

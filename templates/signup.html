@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
@@ -27,6 +28,7 @@
         }
         input[type="text"],
         input[type="password"],
+        input[type="email"],
         input[type="submit"] {
             width: 100%;
             padding: 10px;
@@ -53,8 +55,30 @@
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
             <input type="password" name="confirm_password" placeholder="Confirm Password" required>
-            <input type="submit" value="Signup">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="submit" value="Signup" onclick="gotoLogin()">
         </form>
     </div>
 </body>
+<script>
+    function gotoLogin(){
+        var username = $("#username").val();
+        var pass = $("#password").val();
+        var email = $("#email").val();
+        $.ajax({
+            url: "/signup",
+            method: "POST",
+            data: JSON.stringify({ user: username },{password: pass}, {email: email}),
+            contentType: "application/json",
+            success: function(response) {
+                    alert("User added successfully");
+                },
+            error: function(xhr, status, error) {
+                    alert("Error adding User: "+error);
+                }
+        });
+        window.location.href = "/"
+
+    }
+</script>
 </html>

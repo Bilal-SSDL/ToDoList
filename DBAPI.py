@@ -1,4 +1,3 @@
-from flask import Flask
 import mysql.connector
 
 #DB class
@@ -8,8 +7,6 @@ class dbAPI:
         self.db_name = db_name   
     
     def get_db_connection(self):
-        # connection = sqlite3.connect(self.db_name)
-        # connection.row_factory = sqlite3.Row
         connection = mysql.connector.connect(
             host="localhost",
             user="bilal",
@@ -41,13 +38,5 @@ class dbAPI:
                    password VARCHAR(255) NOT NULL,
                    email VARCHAR(255) NOT NULL
         )''')
-        # cursor.execute('''CREATE TABLE IF NOT EXISTS `accounts` (
-	    #                     `id` int(11) NOT NULL AUTO_INCREMENT,
-  	    #                     `username` varchar(50) NOT NULL,
-  	    #                     `password` varchar(255) NOT NULL,
-  	    #                     `email` varchar(100) NOT NULL,
-        #                    PRIMARY KEY (`id`)
-        #         ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-        # )''')
         connection.commit()
         connection.close()
