@@ -1,15 +1,12 @@
-from flask import Flask, render_template, request, jsonify
+from flask import render_template, request, jsonify, Blueprint
 from DBAPI import dbAPI
-#from flask_sqlalchemy import SQLAlchemy
 
-
-app_inst = Flask(__name__)
-#dbAPI class instance
+app_blueprint = Blueprint('app_blueprint', __name__)
 db_api = dbAPI('tasktodo')
 
 class home:
         
-    @app_inst.route("/" , methods=['GET', 'POST'])
+    @app_blueprint.route("/home" , methods=['GET', 'POST'])
     def home():
         connection = db_api.get_db_connection()
         cursor = db_api.get_db_cursor(connection)
@@ -17,11 +14,9 @@ class home:
         cursor.execute("SELECT * FROM tasks_new")
         data = cursor.fetchall()     
         connection.close()
-        print(data)
-        #for row in data:
         return render_template('home.html', tasks=data)
 
-    @app_inst.route("/add", methods=['GET', 'POST'])
+    @app_blueprint.route("/add", methods=['GET', 'POST'])
     def add_task():
         if request.method == "POST":
             task = request.json.get("task")
@@ -36,7 +31,7 @@ class home:
         elif request.method == "GET":
             return render_template("add_task.html")
 
-    @app_inst.route("/update", methods=['GET', 'PUT'])
+    @app_blueprint.route("/update", methods=['GET', 'PUT'])
     def update_task():
         if request.method == "PUT":
             task = request.json.get("task")
@@ -53,7 +48,7 @@ class home:
         elif request.method == "GET":
             return render_template('update_task.html')
 
-    @app_inst.route("/delete", methods=['GET', 'DELETE'])
+    @app_blueprint.route("/delete", methods=['GET', 'DELETE'])
     def delete_task():
         if request.method == "DELETE":
             id   = request.json.get("id")
@@ -66,6 +61,3 @@ class home:
             return jsonify({"message": "Task Deleted successfully"}), 200
         elif request.method == "GET":
             return render_template('delete_task.html')
-
-    if __name__ == "__main__":
-        app_inst.run(debug=True)

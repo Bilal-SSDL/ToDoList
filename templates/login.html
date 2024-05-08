@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: hsl(128, 16%, 20%);
+            background-color: hsl(130, 10%, 52%);
             margin: 0;
             padding: 0;
             display: flex;
@@ -44,6 +44,13 @@
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
+        .signup-link {
+            text-align: center;
+        }
+        .signup-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -52,8 +59,16 @@
         <form action="/" method="post">
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
-            <input type="submit" value="Login">
+            <input type="submit" value="Login" onclick="gotohome()">
         </form>
+        <div class="signup-link">
+            <p>Not registered? <a href="/signup">Signup here</a></p>
+        </div>
     </div>
 </body>
+<script>
+    function gotohome() {
+        window.location.href = "/home";
+    }
+</script>
 </html>
