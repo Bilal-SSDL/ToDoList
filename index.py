@@ -6,7 +6,7 @@ from auth import user_auth
 app_inst = Flask(__name__)
 app_inst.register_blueprint(app_blueprint)
 db_api = dbAPI('tasktodo')
-usr_auth = user_auth()
+#usr_auth = user_auth()
 
 
 @app_inst.route("/" , methods=['GET', 'POST'])
@@ -27,11 +27,13 @@ def signup():
                 user = request.json.get("username")
                 password = request.json.get("password")
                 email = request.json.get("email")
-                response = usr_auth.signup(user, password, email)
+                response = user_auth.signup(user, password, email)
                 if response == "success":
                        return render_template('login.html')
                 else:
                        return render_template('signup.html')
+        else:
+           return render_template('signup.html')
         #return render_template('login.html', tasks=data)
 if __name__ == "__main__":
     app_inst.run(debug=True)
