@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
@@ -56,10 +57,10 @@
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <form action="/" method="post">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <input type="submit" value="Login" onclick="gotohome()">
+        <form action="/" method="get" id="signinform">
+            <input type="text" name="username" id="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Login" id="signinbtn">
         </form>
         <div class="signup-link">
             <p>Not registered? <a href="/signup">Signup here</a></p>
@@ -67,9 +68,28 @@
     </div>
 </body>
 <script>
-    function gotohome() {
-        window.location.href = "/home";
+    $(document).ready(function() {
+        $("#signinform").submit(function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+            
+            var username = $("#username").val();
+            var pass = $("#password").val();                       
+            $.ajax({
+                url: "/",
+                method: "GET",
+               // data: JSON.stringify({ username: username, password: pass }),
+                data: { username: username, password: pass },
+               // contentType: "application/json",
+                success: function(response) {
+                    alert("User login successfully");
+                    window.location.href = "/home";
+                },
+                error: function(xhr, status, error) {
+                    alert("Error authenticating User: " + error);
+                }
+            });
+        });
+    });
 
-    }
 </script>
 </html>

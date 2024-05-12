@@ -28,4 +28,16 @@ class user_auth:
         return "success"
         #return jsonify({"message": "Task Updated successfully"}), 200
 
+    @staticmethod
+    def signin(user, password):
+        connection = dbapi.get_db_connection()
+        cursor = dbapi.get_db_cursor(connection)
+        # will add user already exists logic here
+        signin_query = "SELECT * from accounts where (username) VALUES (%s)"
+        cursor.execute(signin_query, (user,))
+        data = cursor.fetchall()
+        #if user == data.index[]
+        connection.close()
+        return "success"
+
     

@@ -12,14 +12,21 @@ db_api = dbAPI('tasktodo')
 @app_inst.route("/" , methods=['GET', 'POST'])
 def home():
 
-        connection = db_api.get_db_connection()
-        #cursor = db_api.get_db_cursor(connection)
-        db_api.create_auth_table()
-        #data = cursor.execute("SELECT * FROM tasks_new").fetchall()
-        connection.close()
-        #print(data)
-        return render_template('login.html')
-        #return render_template('login.html', tasks=data)
+   #  if request.method == "GET":   
+        user = request.args.get("username")
+        password = request.args.get("password")
+        
+        if user:
+           connection = db_api.get_db_connection()
+           db_api.create_auth_table()
+           connection.close() 
+           response = user_auth.signin(user, password)
+           if response == "success":
+                return render_template('home.html')
+           else:
+                return response
+        else:
+           return render_template('login.html')
 
 @app_inst.route("/signup" , methods=['GET', 'POST'])
 def signup():
@@ -34,6 +41,5 @@ def signup():
                        return render_template('signup.html')
         else:
            return render_template('signup.html')
-        #return render_template('login.html', tasks=data)
 if __name__ == "__main__":
     app_inst.run(debug=True)
