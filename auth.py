@@ -33,9 +33,10 @@ class user_auth:
         connection = dbapi.get_db_connection()
         cursor = dbapi.get_db_cursor(connection)
         # will add user already exists logic here
-        signin_query = "SELECT * from accounts where (username) VALUES (%s)"
+        signin_query = "SELECT * from accounts where username = %s"
         cursor.execute(signin_query, (user,))
         data = cursor.fetchall()
+
         #if user == data.index[]
         connection.close()
         return "success"
