@@ -5,7 +5,7 @@
 # Javascript
 import mysql.connector
 from DBAPI import dbAPI
-from flask import jsonify
+from flask import jsonify, session
 
 
 
@@ -33,12 +33,20 @@ class user_auth:
         connection = dbapi.get_db_connection()
         cursor = dbapi.get_db_cursor(connection)
         # will add user already exists logic here
-        signin_query = "SELECT * from accounts where username = %s"
-        cursor.execute(signin_query, (user,))
-        data = cursor.fetchall()
-
-        #if user == data.index[]
+        #signin_query = "SELECT * from accounts where username = %s"
+        signin_query = "SELECT * from accounts where username = %s AND password = %s"
+        cursor.execute(signin_query, (user,password,))
+        data = cursor.fetchone()
         connection.close()
-        return "success"
+        if data:
+            #session["loggedin"] = True
+            #session["id"] = data['id']
+            #session["username"] = data['username']
+            return "success"
+        else:
+            return "Incorrect username/password!"
+        #if user == data.index[]
+         
+        #return "success"
 
     
